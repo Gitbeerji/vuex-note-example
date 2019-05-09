@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="item">
     <div class="meta">
-      {{ 'updated' }}
+      {{ updated(entity) }}
     </div>
     <div class="content">
       <div class="header" v-on:click=" open = !open ">
-        {{ entity.body || '新建笔记' }}
+        {{ header(entity) || '新建笔记' }}
       </div>
       <div class="extra">
         <editor
@@ -13,8 +13,8 @@
           v-bind:entity="entity"></editor>
        <div class="ui form">
          <div class="filed">
-           {{ 'words' }} 字
-           <i class="right floated outline icon trash alternate"></i>
+           {{ words(entity) }} 字
+           <i class="right floated outline icon trash alternate" v-on:click="destory(entity)"></i>
          </div>
        </div>
       </div>
@@ -24,8 +24,16 @@
 
 <script>
 import Editor from './Editor'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters([
+      'updated',
+      'words',
+      'header'
+    ])
+  },
   data () {
     return {
       open: false
@@ -38,7 +46,9 @@ export default {
     Editor
   },
   methods: {
-
+    ...mapActions([
+      'destory'
+    ])
   }
 }
 </script>
