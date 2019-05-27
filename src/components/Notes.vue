@@ -5,6 +5,14 @@
       Vue notes
     </h4>
     <div class="ui container">
+      <div class="item">
+          {{ amigo }}
+      </div>
+      <div class="">
+        <input type="text" v-model="hello">
+      </div>
+    </div>
+    <div class="ui container">
       <a
         class="ui right floated basic violet button"
         v-on:click="create">
@@ -31,6 +39,11 @@ import Note from './Note'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      hello: ''
+    }
+  },
   created () {
     this.initial()
   },
@@ -43,7 +56,10 @@ export default {
   computed: {
     ...mapGetters([
       'entities'
-    ])
+    ]),
+    amigo: function () {
+      return this.hello + 'bitch'
+    }
   },
   components: {
     Note
